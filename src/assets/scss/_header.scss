@@ -1,0 +1,19 @@
+.header {
+  text-align: center;
+  padding: 45px 0 20px 0;
+  // border-bottom: 1px solid #999999;
+
+  &:after {
+    content: "";
+    margin: auto;
+    display: block;
+    width: 90%;
+    background-color: red;
+    z-index: 3;
+    border-bottom: 2px solid #999999;
+  }
+  h1 {
+    font-size: 32px;
+    font-weight: map-get($font-weights, "light");
+  }
+}

@@ -1,0 +1,10 @@
+@import "./fonts.scss";
+@import "./grid-container";
+@import "./utils";
+@import "./header";
+@import "./buttons";
+@import "./responsive";
+
+body {
+  font-family: "Poppins", sans-serif;
+}

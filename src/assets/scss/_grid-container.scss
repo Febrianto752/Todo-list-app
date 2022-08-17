@@ -1,0 +1,22 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: minmax(210, auto);
+  gap: 30px;
+
+  &.sm {
+    gap: 10px;
+  }
+
+  @for $i from 1 to 12 {
+    .column-#{$i} {
+      grid-column-end: span #{$i};
+    }
+  }
+
+  @for $i from 1 to 4 {
+    .row-#{$i} {
+      grid-row-end: span #{$i};
+    }
+  }
+}

@@ -1,0 +1,12 @@
+.btn-add-todo {
+  display: block;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  transition: 0.2s;
+  margin: auto;
+
+  &:active {
+    transform: scale(0.8);
+  }
+}
