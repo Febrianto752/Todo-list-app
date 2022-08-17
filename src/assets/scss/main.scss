@@ -1,9 +1,12 @@
-@import "./fonts.scss";
+@import "./colors";
+@import "./fonts";
 @import "./grid-container";
 @import "./utils";
 @import "./header";
 @import "./buttons";
 @import "./responsive";
+@import "./navbar";
+@import "./card";
 
 body {
   font-family: "Poppins", sans-serif;
