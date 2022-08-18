@@ -18,3 +18,26 @@
 .border-0 {
   border: 0;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.press-effect {
+  transition: 0.2s;
+}
+
+.press-effect:active {
+  transform: scale(0.9);
+}
+
+.text-white {
+  color: white;
+}
+
+.line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

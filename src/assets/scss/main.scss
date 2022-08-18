@@ -1,3 +1,4 @@
+@import './css-reset';
 @import "./colors";
 @import "./fonts";
 @import "./grid-container";
@@ -7,6 +8,10 @@
 @import "./responsive";
 @import "./navbar";
 @import "./card";
+
+* {
+  box-sizing: border-box;
+}
 
 body {
   font-family: "Poppins", sans-serif;

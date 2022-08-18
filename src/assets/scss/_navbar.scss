@@ -14,12 +14,12 @@
       text-align: center;
 
       &.active-todo {
-        border-bottom: 4px solid $primary-color;
+        border-bottom: 5px solid $primary-color;
         font-weight: map-get($map: $font-weights, $key: "bold");
       }
 
       &.active-completed {
-        border-bottom: 4px solid $secondary-color;
+        border-bottom: 5px solid $secondary-color;
       }
 
       a {

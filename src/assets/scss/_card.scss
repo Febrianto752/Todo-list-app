@@ -1,6 +1,38 @@
 .card {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  box-shadow: 0 0 4px rgba($color: #000000, $alpha: 0.4);
+  margin-bottom: 20px;
+  border-radius: 6px;
+
+  .card-body {
+    padding: 14px;
+    // padding-right: 16px;
+    flex-basis: 76%;
+
+    textarea {
+      font-family: "Poppins", sans-serif;
+      padding: 10px;
+      width: 100%;
+      height: 100%;
+      line-height: 30px;
+      font-size: 24px;
+    }
+  }
+
+  .actions {
+    height: 24%;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.todo {
   background: linear-gradient(
     135deg,
     $primary-color,
@@ -9,6 +41,15 @@
     $third-color,
     $primary-color
   );
+}
 
-  border-radius: 6px;
+.completed-todo {
+  background: linear-gradient(
+    135deg,
+    $secondary-color,
+    $third-color,
+    $secondary-color,
+    $third-color,
+    $secondary-color
+  );
 }

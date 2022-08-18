@@ -7,6 +7,7 @@ interface Props {
   editTodo?: boolean;
   deleteTodo?: boolean;
   completedTodo?: boolean;
+  undoTodo?: boolean;
 }
 
 const Button: React.FC<Props> = ({
@@ -14,20 +15,56 @@ const Button: React.FC<Props> = ({
   editTodo,
   deleteTodo,
   completedTodo,
+  undoTodo,
 }) => {
-  console.log(createTodo);
+  // console.log(createTodo);
   if (createTodo) {
     return (
-      <button className="btn-add-todo">
-        <Icon icon="akar-icons:circle-plus" width="32" height="32" />
+      <button className="btn-add-todo ">
+        <Icon icon="akar-icons:circle-plus" width="40" height="40" />
       </button>
     );
   }
 
   if (editTodo) {
     return (
-      <button className="d-block border-0 bg-transparent">
-        <Icon icon="akar-icons:edit" />
+      <button
+        className="d-block border-0 bg-transparent cursor-pointer press-effect text-white"
+        title="edit todo"
+      >
+        <Icon icon="akar-icons:edit" width="32" height="32" />
+      </button>
+    );
+  }
+
+  if (deleteTodo) {
+    return (
+      <button
+        className="d-block border-0 bg-transparent cursor-pointer press-effect text-white"
+        title="delete todo"
+      >
+        <Icon icon="material-symbols:delete-outline" width="32" height="32" />
+      </button>
+    );
+  }
+
+  if (completedTodo) {
+    return (
+      <button
+        className="d-block border-0 bg-transparent cursor-pointer press-effect text-white"
+        title="done"
+      >
+        <Icon icon="ic:round-done" width="32" height="32" />
+      </button>
+    );
+  }
+  if (undoTodo) {
+    return (
+      <button
+        className="d-block border-0 bg-transparent cursor-pointer press-effect text-white"
+        title="done"
+      >
+        <Icon icon="icon-park-outline:undo" width="30" height="30" />
       </button>
     );
   }
