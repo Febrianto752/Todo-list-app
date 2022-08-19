@@ -1,6 +1,6 @@
 import React from "react";
-import Todo from "../models";
 import { Icon } from "@iconify/react";
+import Todo from "../models/Todo";
 
 interface Props {
   createTodo?: boolean;
@@ -8,6 +8,9 @@ interface Props {
   deleteTodo?: boolean;
   completedTodo?: boolean;
   undoTodo?: boolean;
+  setFreshlyMadeTodo?: React.Dispatch<React.SetStateAction<boolean>>;
+  todos?: Todo[];
+  setTodos?: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
 
 const Button: React.FC<Props> = ({
@@ -16,11 +19,29 @@ const Button: React.FC<Props> = ({
   deleteTodo,
   completedTodo,
   undoTodo,
+  setFreshlyMadeTodo,
+  todos,
+  setTodos,
 }) => {
   // console.log(createTodo);
+  const handleClickAddTodo = (): void => {
+    if (setFreshlyMadeTodo) {
+      setFreshlyMadeTodo(true);
+    }
+    if (todos && setTodos) {
+      const todo = {
+        _id: (
+          new Date().getTime() + Math.floor(Math.random() * 100)
+        ).toString(),
+        todo: "",
+        isDone: false,
+      };
+      setTodos([...todos, todo]);
+    }
+  };
   if (createTodo) {
     return (
-      <button className="btn-add-todo ">
+      <button className="btn-add-todo" onClick={handleClickAddTodo}>
         <Icon icon="akar-icons:circle-plus" width="40" height="40" />
       </button>
     );

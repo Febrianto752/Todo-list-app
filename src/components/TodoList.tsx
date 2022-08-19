@@ -16,7 +16,29 @@ const TodoList: React.FC<Props> = ({ type, todos, setTodos }) => {
       className="grid-container todo-list"
       style={{ marginTop: "60px" }}
     >
-      <div className="column-12 column-sm-6 column-md-4 column-lg-3">
+      {(todos.length === 0 || !todos.find((todo) => todo.isDone === false)) &&
+      type === "todo" ? (
+        <div className="column-12 text-center">
+          There are no activities planned for today
+        </div>
+      ) : (todos.length === 0 || !todos.find((todo) => todo.isDone === true)) &&
+        type === "completed" ? (
+        <div className="column-12 text-center">completed todo not found</div>
+      ) : type === "todo" ? (
+        todos.map((todo) => (
+          <div
+            key={todo._id}
+            className="column-12 column-sm-6 column-md-4 column-lg-3"
+          >
+            <TodoItem type="todo" />
+          </div>
+        ))
+      ) : (
+        <div className="column-12 column-sm-6 column-md-4 column-lg-3">
+          <TodoItem type="completed" />
+        </div>
+      )}
+      {/* <div className="column-12 column-sm-6 column-md-4 column-lg-3">
         <TodoItem type="active" />
       </div>
       <div className="column-12 column-sm-6 column-md-4 column-lg-3">
@@ -24,7 +46,7 @@ const TodoList: React.FC<Props> = ({ type, todos, setTodos }) => {
       </div>
       <div className="column-12 column-sm-6 column-md-4 column-lg-3">
         <TodoItem type="completed" />
-      </div>
+      </div> */}
     </div>
   );
 };

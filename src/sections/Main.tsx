@@ -10,9 +10,16 @@ const Main: React.FC = () => {
     "todo"
   );
 
+  const [freshlyMadeTodo, setFreshlyMadeTodo] = React.useState<boolean>(false);
+
   return (
     <main className="container">
-      <Button createTodo={true} />
+      <Button
+        createTodo={true}
+        setFreshlyMadeTodo={setFreshlyMadeTodo}
+        todos={todos}
+        setTodos={setTodos}
+      />
       <Navbar activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
       <TodoList type={activeMenu} todos={todos} setTodos={setTodos} />
     </main>
