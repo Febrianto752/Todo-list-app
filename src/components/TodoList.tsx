@@ -7,9 +7,17 @@ interface Props {
   type: "todo" | "completed";
   todos: Todo[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  freshlyMadeTodo: boolean;
+  setFreshlyMadeTodo: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const TodoList: React.FC<Props> = ({ type, todos, setTodos }) => {
+const TodoList: React.FC<Props> = ({
+  type,
+  todos,
+  setTodos,
+  freshlyMadeTodo,
+  setFreshlyMadeTodo,
+}) => {
   return (
     <div
       id="todo-list"
@@ -23,19 +31,32 @@ const TodoList: React.FC<Props> = ({ type, todos, setTodos }) => {
         </div>
       ) : (todos.length === 0 || !todos.find((todo) => todo.isDone === true)) &&
         type === "completed" ? (
-        <div className="column-12 text-center">completed todo not found</div>
+        <div className="column-12 text-center">Completed todo not found</div>
       ) : type === "todo" ? (
-        todos.map((todo) => (
+        todos.map((todo, index) => (
           <div
             key={todo._id}
             className="column-12 column-sm-6 column-md-4 column-lg-3"
           >
-            <TodoItem type="todo" />
+            <TodoItem
+              index={index}
+              type="todo"
+              todos={todos}
+              todo={todo}
+              setTodos={setTodos}
+              freshlyMadeTodo={freshlyMadeTodo}
+              setFreshlyMadeTodo={setFreshlyMadeTodo}
+            />
           </div>
         ))
       ) : (
         <div className="column-12 column-sm-6 column-md-4 column-lg-3">
-          <TodoItem type="completed" />
+          <TodoItem
+            type="completed"
+            todos={todos}
+            setTodos={setTodos}
+            todo={{ _id: "123", todo: "hello", isDone: true }}
+          />
         </div>
       )}
       {/* <div className="column-12 column-sm-6 column-md-4 column-lg-3">

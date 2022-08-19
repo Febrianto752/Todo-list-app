@@ -9,7 +9,7 @@ const Main: React.FC = () => {
   const [activeMenu, setActiveMenu] = React.useState<"todo" | "completed">(
     "todo"
   );
-
+  console.log(todos);
   const [freshlyMadeTodo, setFreshlyMadeTodo] = React.useState<boolean>(false);
 
   return (
@@ -19,9 +19,16 @@ const Main: React.FC = () => {
         setFreshlyMadeTodo={setFreshlyMadeTodo}
         todos={todos}
         setTodos={setTodos}
+        setActiveMenu={setActiveMenu}
       />
       <Navbar activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
-      <TodoList type={activeMenu} todos={todos} setTodos={setTodos} />
+      <TodoList
+        type={activeMenu}
+        todos={todos}
+        setTodos={setTodos}
+        freshlyMadeTodo={freshlyMadeTodo}
+        setFreshlyMadeTodo={setFreshlyMadeTodo}
+      />
     </main>
   );
 };

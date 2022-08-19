@@ -11,6 +11,7 @@ interface Props {
   setFreshlyMadeTodo?: React.Dispatch<React.SetStateAction<boolean>>;
   todos?: Todo[];
   setTodos?: React.Dispatch<React.SetStateAction<Todo[]>>;
+  setActiveMenu?: React.Dispatch<React.SetStateAction<"todo" | "completed">>;
 }
 
 const Button: React.FC<Props> = ({
@@ -22,13 +23,12 @@ const Button: React.FC<Props> = ({
   setFreshlyMadeTodo,
   todos,
   setTodos,
+  setActiveMenu,
 }) => {
-  // console.log(createTodo);
   const handleClickAddTodo = (): void => {
-    if (setFreshlyMadeTodo) {
+    if (setFreshlyMadeTodo && todos && setTodos && setActiveMenu) {
       setFreshlyMadeTodo(true);
-    }
-    if (todos && setTodos) {
+
       const todo = {
         _id: (
           new Date().getTime() + Math.floor(Math.random() * 100)
@@ -36,9 +36,11 @@ const Button: React.FC<Props> = ({
         todo: "",
         isDone: false,
       };
-      setTodos([...todos, todo]);
+      setTodos([todo, ...todos]);
+      setActiveMenu("todo");
     }
   };
+
   if (createTodo) {
     return (
       <button className="btn-add-todo" onClick={handleClickAddTodo}>
