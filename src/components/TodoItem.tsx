@@ -1,22 +1,18 @@
 import React from "react";
 import Button from "./Button";
 
-enum Type {
-  active = "active",
-  todo = "todo",
-  completed = "completed",
-}
-
 interface Props {
   type: "active" | "todo" | "completed";
 }
 
 const TodoItem: React.FC<Props> = ({ type }) => {
+  const textareaRef = React.createRef<HTMLTextAreaElement>();
+
   if (type === "active") {
     return (
       <div className="card todo">
         <div className="card-body">
-          <textarea></textarea>
+          <textarea ref={textareaRef}></textarea>
         </div>
         <div className="actions">
           <Button editTodo={true} />
@@ -71,7 +67,7 @@ const TodoItem: React.FC<Props> = ({ type }) => {
       </div>
     );
   }
-  console.log(type);
+
   return <div>Empty Todo</div>;
 };
 

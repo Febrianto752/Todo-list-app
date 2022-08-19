@@ -1,8 +1,15 @@
 import React from "react";
-import Button from "./Button";
+// import Button from "./Button";
 import TodoItem from "./TodoItem";
+import Todo from "../models/Todo";
 
-const TodoList: React.FC = () => {
+interface Props {
+  type: "todo" | "completed";
+  todos: Todo[];
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+}
+
+const TodoList: React.FC<Props> = ({ type, todos, setTodos }) => {
   return (
     <div
       id="todo-list"

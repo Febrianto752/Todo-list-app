@@ -1,16 +1,39 @@
 import React from "react";
 
-const Navbar: React.FC = () => {
+interface Props {
+  activeMenu: string;
+  setActiveMenu: React.Dispatch<React.SetStateAction<"todo" | "completed">>;
+}
+
+const Navbar: React.FC<Props> = ({ activeMenu, setActiveMenu }) => {
+  const handleClickTodoMenu = () => {
+    setActiveMenu("todo");
+  };
+
+  const handleClickCompletedMenu = () => {
+    setActiveMenu("completed");
+  };
+
   let crashHref = "#";
   return (
     <nav className="navbar">
       <ul>
-        <li className="nav-item active-todo">
+        <li
+          className={`nav-item ${
+            activeMenu.toString() === "todo" ? "active-todo" : ""
+          }`}
+          onClick={handleClickTodoMenu}
+        >
           <a className="nav-link" href={crashHref}>
             Todo
           </a>
         </li>
-        <li className="nav-item">
+        <li
+          className={`nav-item ${
+            activeMenu.toString() === "completed" ? "active-completed" : ""
+          }`}
+          onClick={handleClickCompletedMenu}
+        >
           <a className="nav-link" href={crashHref}>
             Completed
           </a>
