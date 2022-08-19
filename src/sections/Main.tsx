@@ -1,15 +1,15 @@
 import React from "react";
 import Button from "../components/Button";
 import Navbar from "../components/Navbar";
-import Content from "./Content";
+import TodoList from "../components/TodoList";
 
 const Main: React.FC = () => {
   return (
-    <div className="container">
+    <main className="container">
       <Button createTodo={true} />
       <Navbar />
-      <Content />
-    </div>
+      <TodoList />
+    </main>
   );
 };
 

@@ -13,6 +13,10 @@
       height: 80px;
       text-align: center;
 
+      &:hover {
+        font-weight: map-get($map: $font-weights, $key: "bold");
+      }
+
       &.active-todo {
         border-bottom: 5px solid $primary-color;
         font-weight: map-get($map: $font-weights, $key: "bold");
@@ -20,6 +24,7 @@
 
       &.active-completed {
         border-bottom: 5px solid $secondary-color;
+        font-weight: map-get($map: $font-weights, $key: "bold");
       }
 
       a {
