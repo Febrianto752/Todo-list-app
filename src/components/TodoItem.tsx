@@ -22,14 +22,13 @@ const TodoItem: React.FC<Props> = ({
   setFreshlyMadeTodo,
 }) => {
   const textareaRef = React.createRef<HTMLTextAreaElement>();
-  const [editable, setEditable] = React.useState<boolean>(false);
-  const [editTodo, setEditTodo] = React.useState<string>("");
+  const [editable, setEditableTodo] = React.useState<boolean>(false);
+  const [editTodo, setEditTodo] = React.useState<string>(todo.todo);
 
   React.useEffect(() => {
     if (freshlyMadeTodo) {
       textareaRef.current?.focus();
     }
-    console.log("hai");
   });
 
   const handleOnBlurTextarea = (
@@ -40,9 +39,11 @@ const TodoItem: React.FC<Props> = ({
       setFreshlyMadeTodo(false);
     }
 
+    setEditableTodo(false);
+
     setTodos(
-      todos.map((todox) =>
-        todox._id === id ? { ...todox, todo: editTodo } : todox
+      todos.map((todo) =>
+        todo._id === id ? { ...todo, todo: editTodo } : todo
       )
     );
   };
@@ -60,13 +61,17 @@ const TodoItem: React.FC<Props> = ({
             value={editTodo}
             onChange={handleChangeTextarea}
             autoFocus
+            onFocus={(event) => {
+              const end = event.target.value.length;
+              event.target.setSelectionRange(end, end);
+            }}
             onBlur={(event) => {
               handleOnBlurTextarea(event, todo._id);
             }}
           ></textarea>
         </div>
         <div className="actions">
-          <Button editTodo={true} />
+          <Button editTodo={true} setEditableTodo={setEditableTodo} />
           <Button deleteTodo={true} />
           <Button completedTodo={true} />
         </div>
@@ -87,7 +92,7 @@ const TodoItem: React.FC<Props> = ({
           </p>
         </div>
         <div className="actions">
-          <Button editTodo={true} />
+          <Button editTodo={true} setEditableTodo={setEditableTodo} />
           <Button deleteTodo={true} />
           <Button completedTodo={true} />
         </div>

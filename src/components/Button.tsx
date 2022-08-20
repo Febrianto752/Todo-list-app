@@ -12,6 +12,7 @@ interface Props {
   todos?: Todo[];
   setTodos?: React.Dispatch<React.SetStateAction<Todo[]>>;
   setActiveMenu?: React.Dispatch<React.SetStateAction<"todo" | "completed">>;
+  setEditableTodo?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Button: React.FC<Props> = ({
@@ -24,6 +25,7 @@ const Button: React.FC<Props> = ({
   todos,
   setTodos,
   setActiveMenu,
+  setEditableTodo,
 }) => {
   const handleClickAddTodo = (): void => {
     if (setFreshlyMadeTodo && todos && setTodos && setActiveMenu) {
@@ -50,14 +52,23 @@ const Button: React.FC<Props> = ({
   }
 
   if (editTodo) {
-    return (
-      <button
-        className="d-block border-0 bg-transparent cursor-pointer press-effect text-white"
-        title="edit todo"
-      >
-        <Icon icon="akar-icons:edit" width="32" height="32" />
-      </button>
-    );
+    if (setEditableTodo) {
+      const handleClickEditableTodo = () => {
+        setEditableTodo(true);
+      };
+
+      return (
+        <button
+          className="d-block border-0 bg-transparent cursor-pointer press-effect text-white"
+          title="edit todo"
+          onClick={handleClickEditableTodo}
+        >
+          <Icon icon="akar-icons:edit" width="32" height="32" />
+        </button>
+      );
+    }
+
+    throw new Error("setEditable function is undefined");
   }
 
   if (deleteTodo) {
