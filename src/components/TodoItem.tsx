@@ -72,7 +72,12 @@ const TodoItem: React.FC<Props> = ({
         </div>
         <div className="actions">
           <Button editTodo={true} setEditableTodo={setEditableTodo} />
-          <Button deleteTodo={true} />
+          <Button
+            deleteTodo={true}
+            todos={todos}
+            setTodos={setTodos}
+            todo={todo}
+          />
           <Button completedTodo={true} />
         </div>
       </div>
@@ -93,7 +98,12 @@ const TodoItem: React.FC<Props> = ({
         </div>
         <div className="actions">
           <Button editTodo={true} setEditableTodo={setEditableTodo} />
-          <Button deleteTodo={true} />
+          <Button
+            deleteTodo={true}
+            todos={todos}
+            setTodos={setTodos}
+            todo={todo}
+          />
           <Button completedTodo={true} />
         </div>
       </div>
@@ -115,7 +125,12 @@ const TodoItem: React.FC<Props> = ({
           </p>
         </div>
         <div className="actions">
-          <Button deleteTodo={true} />
+          <Button
+            deleteTodo={true}
+            todos={todos}
+            setTodos={setTodos}
+            todo={todo}
+          />
           <Button undoTodo={true} />
         </div>
       </div>

@@ -10,6 +10,7 @@ interface Props {
   undoTodo?: boolean;
   setFreshlyMadeTodo?: React.Dispatch<React.SetStateAction<boolean>>;
   todos?: Todo[];
+  todo?: Todo;
   setTodos?: React.Dispatch<React.SetStateAction<Todo[]>>;
   setActiveMenu?: React.Dispatch<React.SetStateAction<"todo" | "completed">>;
   setEditableTodo?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -23,6 +24,7 @@ const Button: React.FC<Props> = ({
   undoTodo,
   setFreshlyMadeTodo,
   todos,
+  todo,
   setTodos,
   setActiveMenu,
   setEditableTodo,
@@ -72,14 +74,25 @@ const Button: React.FC<Props> = ({
   }
 
   if (deleteTodo) {
-    return (
-      <button
-        className="d-block border-0 bg-transparent cursor-pointer press-effect text-white"
-        title="delete todo"
-      >
-        <Icon icon="material-symbols:delete-outline" width="32" height="32" />
-      </button>
-    );
+    if (todo && todos && setTodos) {
+      const handleClickDeleteTodo = (id: string) => {
+        setTodos(todos.filter((todo) => todo._id !== id));
+      };
+
+      return (
+        <button
+          className="d-block border-0 bg-transparent cursor-pointer press-effect text-white"
+          title="delete todo"
+          onClick={(e) => {
+            handleClickDeleteTodo(todo._id);
+          }}
+        >
+          <Icon icon="material-symbols:delete-outline" width="32" height="32" />
+        </button>
+      );
+    }
+
+    throw new Error("todo or todos or setTodos is undefined");
   }
 
   if (completedTodo) {
