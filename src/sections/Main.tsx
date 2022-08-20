@@ -24,6 +24,7 @@ const Main: React.FC = () => {
       <TodoList
         type={activeMenu}
         todos={todos}
+        activeMenu={activeMenu}
         setTodos={setTodos}
         freshlyMadeTodo={freshlyMadeTodo}
         setFreshlyMadeTodo={setFreshlyMadeTodo}

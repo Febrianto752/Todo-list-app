@@ -53,7 +53,7 @@ const TodoItem: React.FC<Props> = ({
   };
 
   return (
-    <div className="card todo">
+    <div className={`card ${type === "todo" ? "todo" : "completed-todo"}`}>
       <div className="card-body">
         {(freshlyMadeTodo && index === 0) || Boolean(editable) !== false ? (
           <textarea
@@ -81,10 +81,7 @@ const TodoItem: React.FC<Props> = ({
             className="text-white line-clamp"
             style={{ lineHeight: "30px", fontSize: "24px" }}
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores
-            dolorem voluptatum excepturi, deserunt neque atque aliquid tempora
-            doloribus quibusdam vero recusandae totam non debitis quod cumque,
-            quia voluptate reiciendis. Beatae.
+            {todo.todo}
           </p>
         )}
       </div>
@@ -98,7 +95,12 @@ const TodoItem: React.FC<Props> = ({
               setTodos={setTodos}
               todo={todo}
             />
-            <Button type="completed" />
+            <Button
+              type="completed"
+              todos={todos}
+              todo={todo}
+              setTodos={setTodos}
+            />
           </>
         ) : (
           <>
@@ -108,7 +110,7 @@ const TodoItem: React.FC<Props> = ({
               setTodos={setTodos}
               todo={todo}
             />
-            <Button type="undo" />
+            <Button type="undo" todos={todos} todo={todo} setTodos={setTodos} />
           </>
         )}
       </div>

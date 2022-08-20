@@ -88,25 +88,55 @@ const Button: React.FC<Props> = ({
   }
 
   if (type === "completed") {
-    return (
-      <button
-        className="d-block border-0 bg-transparent cursor-pointer press-effect text-white"
-        title="done"
-      >
-        <Icon icon="ic:round-done" width="32" height="32" />
-      </button>
-    );
+    if (setTodos && todos && todo) {
+      const handleClickCompletedTodo = (id: string): void => {
+        setTodos(
+          todos.map((todo) =>
+            todo._id === id ? { ...todo, isDone: true } : todo
+          )
+        );
+      };
+
+      return (
+        <button
+          className="d-block border-0 bg-transparent cursor-pointer press-effect text-white"
+          title="done"
+          onClick={(e) => {
+            handleClickCompletedTodo(todo._id);
+          }}
+        >
+          <Icon icon="ic:round-done" width="32" height="32" />
+        </button>
+      );
+    }
+
+    throw new Error("setTodos or todos is undefined!");
   }
 
   if (type === "undo") {
-    return (
-      <button
-        className="d-block border-0 bg-transparent cursor-pointer press-effect text-white"
-        title="done"
-      >
-        <Icon icon="icon-park-outline:undo" width="30" height="30" />
-      </button>
-    );
+    if (setTodos && todos && todo) {
+      const handleClickUndoTodo = (id: string): void => {
+        setTodos(
+          todos.map((todo) =>
+            todo._id === id ? { ...todo, isDone: false } : todo
+          )
+        );
+      };
+
+      return (
+        <button
+          className="d-block border-0 bg-transparent cursor-pointer press-effect text-white"
+          title="done"
+          onClick={(e) => {
+            handleClickUndoTodo(todo._id);
+          }}
+        >
+          <Icon icon="icon-park-outline:undo" width="30" height="30" />
+        </button>
+      );
+    }
+
+    throw new Error("setTodos or todos is undefined!");
   }
   return <div>Button</div>;
 };
