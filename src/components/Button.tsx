@@ -3,11 +3,7 @@ import { Icon } from "@iconify/react";
 import Todo from "../models/Todo";
 
 interface Props {
-  createTodo?: boolean;
-  editTodo?: boolean;
-  deleteTodo?: boolean;
-  completedTodo?: boolean;
-  undoTodo?: boolean;
+  type: "create" | "edit" | "delete" | "completed" | "undo";
   setFreshlyMadeTodo?: React.Dispatch<React.SetStateAction<boolean>>;
   todos?: Todo[];
   todo?: Todo;
@@ -17,11 +13,7 @@ interface Props {
 }
 
 const Button: React.FC<Props> = ({
-  createTodo,
-  editTodo,
-  deleteTodo,
-  completedTodo,
-  undoTodo,
+  type,
   setFreshlyMadeTodo,
   todos,
   todo,
@@ -45,7 +37,7 @@ const Button: React.FC<Props> = ({
     }
   };
 
-  if (createTodo) {
+  if (type === "create") {
     return (
       <button className="btn-add-todo" onClick={handleClickAddTodo}>
         <Icon icon="akar-icons:circle-plus" width="40" height="40" />
@@ -53,7 +45,7 @@ const Button: React.FC<Props> = ({
     );
   }
 
-  if (editTodo) {
+  if (type === "edit") {
     if (setEditableTodo) {
       const handleClickEditableTodo = () => {
         setEditableTodo(true);
@@ -73,7 +65,7 @@ const Button: React.FC<Props> = ({
     throw new Error("setEditable function is undefined");
   }
 
-  if (deleteTodo) {
+  if (type === "delete") {
     if (todo && todos && setTodos) {
       const handleClickDeleteTodo = (id: string) => {
         setTodos(todos.filter((todo) => todo._id !== id));
@@ -95,7 +87,7 @@ const Button: React.FC<Props> = ({
     throw new Error("todo or todos or setTodos is undefined");
   }
 
-  if (completedTodo) {
+  if (type === "completed") {
     return (
       <button
         className="d-block border-0 bg-transparent cursor-pointer press-effect text-white"
@@ -105,7 +97,8 @@ const Button: React.FC<Props> = ({
       </button>
     );
   }
-  if (undoTodo) {
+
+  if (type === "undo") {
     return (
       <button
         className="d-block border-0 bg-transparent cursor-pointer press-effect text-white"

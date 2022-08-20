@@ -91,24 +91,24 @@ const TodoItem: React.FC<Props> = ({
       <div className="actions">
         {type === "todo" ? (
           <>
-            <Button editTodo={true} setEditableTodo={setEditableTodo} />
+            <Button type="edit" setEditableTodo={setEditableTodo} />
             <Button
-              deleteTodo={true}
+              type="delete"
               todos={todos}
               setTodos={setTodos}
               todo={todo}
             />
-            <Button completedTodo={true} />
+            <Button type="completed" />
           </>
         ) : (
           <>
             <Button
-              deleteTodo={true}
+              type="delete"
               todos={todos}
               setTodos={setTodos}
               todo={todo}
             />
-            <Button undoTodo={true} />
+            <Button type="undo" />
           </>
         )}
       </div>

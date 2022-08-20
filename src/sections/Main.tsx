@@ -14,7 +14,7 @@ const Main: React.FC = () => {
   return (
     <main className="container">
       <Button
-        createTodo={true}
+        type="create"
         setFreshlyMadeTodo={setFreshlyMadeTodo}
         todos={todos}
         setTodos={setTodos}
