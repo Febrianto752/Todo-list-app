@@ -52,10 +52,10 @@ const TodoItem: React.FC<Props> = ({
     setEditTodo(e.target.value);
   };
 
-  if ((freshlyMadeTodo && index === 0) || editable === true) {
-    return (
-      <div className="card todo">
-        <div className="card-body">
+  return (
+    <div className="card todo">
+      <div className="card-body">
+        {(freshlyMadeTodo && index === 0) || Boolean(editable) !== false ? (
           <textarea
             ref={textareaRef}
             value={editTodo}
@@ -69,51 +69,14 @@ const TodoItem: React.FC<Props> = ({
               handleOnBlurTextarea(event, todo._id);
             }}
           ></textarea>
-        </div>
-        <div className="actions">
-          <Button editTodo={true} setEditableTodo={setEditableTodo} />
-          <Button
-            deleteTodo={true}
-            todos={todos}
-            setTodos={setTodos}
-            todo={todo}
-          />
-          <Button completedTodo={true} />
-        </div>
-      </div>
-    );
-  }
-
-  if (type === "todo") {
-    textareaRef.current?.focus();
-    return (
-      <div className="card todo">
-        <div className="card-body">
+        ) : type === "todo" ? (
           <p
             className="text-white line-clamp"
             style={{ lineHeight: "30px", fontSize: "24px" }}
           >
             {todo.todo}
           </p>
-        </div>
-        <div className="actions">
-          <Button editTodo={true} setEditableTodo={setEditableTodo} />
-          <Button
-            deleteTodo={true}
-            todos={todos}
-            setTodos={setTodos}
-            todo={todo}
-          />
-          <Button completedTodo={true} />
-        </div>
-      </div>
-    );
-  }
-
-  if (type === "completed") {
-    return (
-      <div className="card completed-todo">
-        <div className="card-body">
+        ) : (
           <p
             className="text-white line-clamp"
             style={{ lineHeight: "30px", fontSize: "24px" }}
@@ -123,21 +86,34 @@ const TodoItem: React.FC<Props> = ({
             doloribus quibusdam vero recusandae totam non debitis quod cumque,
             quia voluptate reiciendis. Beatae.
           </p>
-        </div>
-        <div className="actions">
-          <Button
-            deleteTodo={true}
-            todos={todos}
-            setTodos={setTodos}
-            todo={todo}
-          />
-          <Button undoTodo={true} />
-        </div>
+        )}
       </div>
-    );
-  }
-
-  return <div>Empty Todo</div>;
+      <div className="actions">
+        {type === "todo" ? (
+          <>
+            <Button editTodo={true} setEditableTodo={setEditableTodo} />
+            <Button
+              deleteTodo={true}
+              todos={todos}
+              setTodos={setTodos}
+              todo={todo}
+            />
+            <Button completedTodo={true} />
+          </>
+        ) : (
+          <>
+            <Button
+              deleteTodo={true}
+              todos={todos}
+              setTodos={setTodos}
+              todo={todo}
+            />
+            <Button undoTodo={true} />
+          </>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default TodoItem;

@@ -9,7 +9,6 @@ const Main: React.FC = () => {
   const [activeMenu, setActiveMenu] = React.useState<"todo" | "completed">(
     "todo"
   );
-  console.log(todos);
   const [freshlyMadeTodo, setFreshlyMadeTodo] = React.useState<boolean>(false);
 
   return (
