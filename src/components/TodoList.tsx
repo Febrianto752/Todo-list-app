@@ -5,7 +5,7 @@ import Todo from "../models/Todo";
 interface Props {
   type: "todo" | "completed";
   todos: Todo[];
-  activeMenu: string;
+  // activeMenu: string;
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
   freshlyMadeTodo: boolean;
   setFreshlyMadeTodo: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,7 +14,7 @@ interface Props {
 const TodoList: React.FC<Props> = ({
   type,
   todos,
-  activeMenu,
+  // activeMenu,
   setTodos,
   freshlyMadeTodo,
   setFreshlyMadeTodo,
@@ -39,7 +39,7 @@ const TodoList: React.FC<Props> = ({
             return (
               <div
                 key={todo._id}
-                className="column-12 column-sm-6 column-md-4 column-lg-3"
+                className="column-12 column-sm-6 column-lg-4 column-xl-3"
               >
                 <TodoItem
                   index={index}

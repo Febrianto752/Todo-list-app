@@ -22,14 +22,16 @@ const TodoItem: React.FC<Props> = ({
   setFreshlyMadeTodo,
 }) => {
   const textareaRef = React.createRef<HTMLTextAreaElement>();
-  const [editable, setEditableTodo] = React.useState<boolean>(false);
+  const [editable, setEditableTodo] = React.useState<boolean>(
+    freshlyMadeTodo === true ? true : false
+  );
   const [editTodo, setEditTodo] = React.useState<string>(todo.todo);
 
-  React.useEffect(() => {
-    if (freshlyMadeTodo) {
-      textareaRef.current?.focus();
-    }
-  });
+  // React.useEffect(() => {
+  // if (freshlyMadeTodo) {
+  //   textareaRef.current?.focus();
+  // }
+  // });
 
   const handleOnBlurTextarea = (
     event: React.FocusEvent<HTMLTextAreaElement, Element>,
@@ -52,16 +54,37 @@ const TodoItem: React.FC<Props> = ({
     setEditTodo(e.target.value);
   };
 
+  const handleSaveTodo = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    id: string
+  ) => {
+    if (setFreshlyMadeTodo && freshlyMadeTodo) {
+      setFreshlyMadeTodo(false);
+    }
+
+    setEditableTodo(false);
+
+    setTodos(
+      todos.map((todo) =>
+        todo._id === id ? { ...todo, todo: editTodo } : todo
+      )
+    );
+  };
+
   return (
     <div className={`card ${type === "todo" ? "todo" : "completed-todo"}`}>
-      <div className="card-body">
-        {(freshlyMadeTodo && index === 0) || Boolean(editable) !== false ? (
+      <div
+        className="card-body"
+        style={{ maxHeight: "200px", overflow: "auto" }}
+      >
+        {editable ? (
           <textarea
             ref={textareaRef}
             value={editTodo}
             onChange={handleChangeTextarea}
             autoFocus
             onFocus={(event) => {
+              // membuat saat edit todo maka cursor akan ada di akhir teks
               const end = event.target.value.length;
               event.target.setSelectionRange(end, end);
             }}
@@ -77,6 +100,7 @@ const TodoItem: React.FC<Props> = ({
             {todo.todo}
           </p>
         ) : (
+          // jika completed todo
           <p
             className="text-white line-clamp"
             style={{ lineHeight: "30px", fontSize: "24px" }}
@@ -85,7 +109,7 @@ const TodoItem: React.FC<Props> = ({
           </p>
         )}
       </div>
-      <div className="actions">
+      <div className="actions" style={{ marginTop: "20px" }}>
         {type === "todo" ? (
           <>
             <Button type="edit" setEditableTodo={setEditableTodo} />
@@ -95,12 +119,14 @@ const TodoItem: React.FC<Props> = ({
               setTodos={setTodos}
               todo={todo}
             />
-            <Button
-              type="completed"
-              todos={todos}
-              todo={todo}
-              setTodos={setTodos}
-            />
+            {!editable && (
+              <Button
+                type="completed"
+                todos={todos}
+                todo={todo}
+                setTodos={setTodos}
+              />
+            )}
           </>
         ) : (
           <>

@@ -138,7 +138,8 @@ const Button: React.FC<Props> = ({
 
     throw new Error("setTodos or todos is undefined!");
   }
-  return <div>Button</div>;
+
+  return <button>Button</button>;
 };
 
 export default Button;

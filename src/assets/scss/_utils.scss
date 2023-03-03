@@ -36,8 +36,10 @@
 }
 
 .line-clamp {
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  // display: -webkit-box;
+  // -webkit-line-clamp: 4;
+  // -webkit-box-orient: vertical;
+  // overflow: hidden;
+  // inline-size: 250px;
+  overflow-wrap: break-word;
 }
