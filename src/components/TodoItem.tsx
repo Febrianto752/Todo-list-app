@@ -75,7 +75,7 @@ const TodoItem: React.FC<Props> = ({
     <div className={`card ${type === "todo" ? "todo" : "completed-todo"}`}>
       <div
         className="card-body"
-        style={{ maxHeight: "200px", overflow: "auto" }}
+        style={{ maxHeight: "200px", overflowY: "auto" }}
       >
         {editable ? (
           <textarea
@@ -91,14 +91,20 @@ const TodoItem: React.FC<Props> = ({
             onBlur={(event) => {
               handleOnBlurTextarea(event, todo._id);
             }}
+            rows={5}
           ></textarea>
         ) : type === "todo" ? (
-          <p
+          <pre
             className="text-white line-clamp"
-            style={{ lineHeight: "30px", fontSize: "24px" }}
+            style={{
+              lineHeight: "30px",
+              fontSize: "24px",
+              whiteSpace: "pre-wrap",
+              wordWrap: "break-word",
+            }}
           >
             {todo.todo}
-          </p>
+          </pre>
         ) : (
           // jika completed todo
           <p
@@ -119,6 +125,9 @@ const TodoItem: React.FC<Props> = ({
               setTodos={setTodos}
               todo={todo}
             />
+            {editable && (
+              <Button type="save" todo={todo} handleSaveTodo={handleSaveTodo} />
+            )}
             {!editable && (
               <Button
                 type="completed"

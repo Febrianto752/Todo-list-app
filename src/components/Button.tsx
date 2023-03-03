@@ -3,13 +3,14 @@ import { Icon } from "@iconify/react";
 import Todo from "../models/Todo";
 
 interface Props {
-  type: "create" | "edit" | "delete" | "completed" | "undo";
+  type: "create" | "edit" | "delete" | "completed" | "undo" | "save";
   setFreshlyMadeTodo?: React.Dispatch<React.SetStateAction<boolean>>;
   todos?: Todo[];
   todo?: Todo;
   setTodos?: React.Dispatch<React.SetStateAction<Todo[]>>;
   setActiveMenu?: React.Dispatch<React.SetStateAction<"todo" | "completed">>;
   setEditableTodo?: React.Dispatch<React.SetStateAction<boolean>>;
+  handleSaveTodo?: Function;
 }
 
 const Button: React.FC<Props> = ({
@@ -20,6 +21,7 @@ const Button: React.FC<Props> = ({
   setTodos,
   setActiveMenu,
   setEditableTodo,
+  handleSaveTodo,
 }) => {
   const handleClickAddTodo = (): void => {
     if (setFreshlyMadeTodo && todos && setTodos && setActiveMenu) {
@@ -126,7 +128,7 @@ const Button: React.FC<Props> = ({
       return (
         <button
           className="d-block border-0 bg-transparent cursor-pointer press-effect text-white"
-          title="done"
+          title="undo"
           onClick={(e) => {
             handleClickUndoTodo(todo._id);
           }}
@@ -137,6 +139,22 @@ const Button: React.FC<Props> = ({
     }
 
     throw new Error("setTodos or todos is undefined!");
+  }
+
+  if (type === "save") {
+    return (
+      <button
+        className="d-block border-0 bg-transparent cursor-pointer press-effect text-white"
+        title="save"
+        onClick={(e) => {
+          if (handleSaveTodo && todo) {
+            handleSaveTodo(todo._id);
+          }
+        }}
+      >
+        <Icon icon="ri:save-3-fill" width="30" height="30" />
+      </button>
+    );
   }
 
   return <button>Button</button>;
